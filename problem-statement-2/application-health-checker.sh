@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Application Health Checker
-# AccuKnox DevOps Trainee - Problem Statement 2
-
 URL="${1:-https://127.0.0.1:9443}"
 HOST_HEADER="wisecow.local"
 LOG_FILE="application-health.log"
