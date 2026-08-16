@@ -1,30 +1,62 @@
-# Cow wisdom web server
+# Wisecow – Containerization and Kubernetes Deployment
 
-## Prerequisites
+## Project Overview
 
-```
-sudo apt install fortune-mod cowsay -y
-```
+This project demonstrates the containerization and deployment of the Wisecow application using Docker and Kubernetes.
 
-## How to use?
+The application is deployed on a local Minikube Kubernetes cluster and exposed through an NGINX Ingress Controller with TLS/HTTPS communication.
 
-1. Run `./wisecow.sh`
-2. Point the browser to server port (default 4499)
+GitHub Actions is used to automate the Docker image build and push process to Docker Hub, with a Kubernetes deployment stage included in the CI/CD workflow.
 
-## What to expect?
-![wisecow](https://github.com/nyrahul/wisecow/assets/9133227/8d6bfde3-4a5a-480e-8d55-3fef60300d98)
 
-# Problem Statement
-Deploy the wisecow application as a k8s app
+## Objectives
 
-## Requirement
-1. Create Dockerfile for the image and corresponding k8s manifest to deploy in k8s env. The wisecow service should be exposed as k8s service.
-2. Github action for creating new image when changes are made to this repo
-3. [Challenge goal]: Enable secure TLS communication for the wisecow app.
+- Containerize the Wisecow application using Docker.
+- Deploy the application on Kubernetes using Minikube.
+- Expose the application using a Kubernetes Service.
+- Configure NGINX Ingress for external access.
+- Secure application communication using TLS.
+- Automate Docker image build and push using GitHub Actions.
+- Include Kubernetes deployment as part of the CI/CD workflow.
 
-## Expected Artifacts
-1. Github repo containing the app with corresponding dockerfile, k8s manifest, any other artifacts needed.
-2. Github repo with corresponding github action.
-3. Github repo should be kept private and the access should be enabled for following github IDs: nyrahul
+---
+
+## Architecture
+
+```text
+                    Developer
+                        |
+                        | git push
+                        v
+                  GitHub Repository
+                        |
+                        v
+                 GitHub Actions
+                        |
+             +----------+----------+
+             |                     |
+             v                     v
+       Docker Build          Docker Push
+             |                     |
+             +----------+----------+
+                        |
+                        v
+                    Docker Hub
+                        |
+                        v
+                 Kubernetes
+                   Minikube
+                        |
+                  NGINX Ingress
+                        |
+                    HTTPS/TLS
+                        |
+                        v
+                Wisecow Service
+                        |
+                 +------+------+
+                 |             |
+                 v             v
+              Pod 1          Pod 2
 
 
