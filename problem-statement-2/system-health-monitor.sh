@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# System Health Monitoring Script
-# AccuKnox DevOps Trainee - Problem Statement 2
-
 CPU_THRESHOLD=80
 MEMORY_THRESHOLD=80
 DISK_THRESHOLD=80
@@ -15,7 +12,7 @@ echo "Date: $(date)" | tee -a "$LOG_FILE"
 echo "Hostname: $(hostname)" | tee -a "$LOG_FILE"
 echo "========================================" | tee -a "$LOG_FILE"
 
-# CPU Usage
+
 CPU_USAGE=$(top -bn1 | awk '/Cpu\(s\)/ {print 100 - $8}' | cut -d. -f1)
 
 echo "CPU Usage: ${CPU_USAGE}%" | tee -a "$LOG_FILE"
@@ -26,7 +23,6 @@ else
     echo "CPU usage is normal." | tee -a "$LOG_FILE"
 fi
 
-# Memory Usage
 MEMORY_USAGE=$(free | awk '/Mem:/ {printf "%.0f", ($3/$2)*100}')
 
 echo "Memory Usage: ${MEMORY_USAGE}%" | tee -a "$LOG_FILE"
@@ -37,7 +33,7 @@ else
     echo "Memory usage is normal." | tee -a "$LOG_FILE"
 fi
 
-# Disk Usage
+
 DISK_USAGE=$(df / | awk 'NR==2 {gsub("%",""); print $5}')
 
 echo "Disk Usage: ${DISK_USAGE}%" | tee -a "$LOG_FILE"
@@ -48,7 +44,7 @@ else
     echo "Disk usage is normal." | tee -a "$LOG_FILE"
 fi
 
-# Running Processes
+
 PROCESS_COUNT=$(ps aux --no-headers | wc -l)
 
 echo "Running Processes: $PROCESS_COUNT" | tee -a "$LOG_FILE"
